@@ -1,0 +1,29 @@
+jwt:
+  secret: "secret"
+
+server:
+  port: 8081
+  # error:
+  #   whitelabel:
+  #     enabled: false
+
+spring:
+  security:
+    user:
+      name: "Gim"
+      password: "gim"
+  datasource:
+    url: jdbc:mysql://localhost:3306/todoapp
+    password: root
+    username: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false

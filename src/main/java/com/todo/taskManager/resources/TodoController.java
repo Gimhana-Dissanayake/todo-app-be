@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.todo.taskManager.models.Todo;
+import com.todo.taskManager.repositories.TodoRepository;
 import com.todo.taskManager.services.TodoService;
 
 @RestController
@@ -25,21 +26,28 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @GetMapping("/users/{username}/todos")
-    public List<Todo> getAllTodos() {
+    @Autowired
+    private TodoRepository todoRepository;
 
-        return this.todoService.findAll();
+    @GetMapping("/{username}/todos")
+    public ResponseEntity<List<Todo>> getAllTodos(@PathVariable String username) {
 
-    }
+        List<Todo> todoList = todoRepository.findByUsername(username);
 
-    @GetMapping("/users/{username}/todos/{id}")
-    public Todo getTodoById(@PathVariable long id) {
-
-        return this.todoService.findById(id);
+        return new ResponseEntity<List<Todo>>(todoList, HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/users/{username}/todos/{id}")
+    @GetMapping("/{username}/todos/{id}")
+    public ResponseEntity<Todo> getTodoById(@PathVariable String username, @PathVariable long id) {
+
+        Todo todo = todoRepository.findById(id).get();
+
+        return new ResponseEntity<Todo>(todo, HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/{username}/todos/{id}")
     public ResponseEntity<Todo> deleteTodo(@PathVariable String username, @PathVariable long id) {
 
         Todo todo = todoService.deleteById(id);
@@ -52,17 +60,16 @@ public class TodoController {
 
     }
 
-    @PutMapping("/users/{username}/todos/{id}")
+    @PutMapping("/{username}/todos/{id}")
     public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id,
             @RequestBody Todo todo) {
-        System.out.println("CAME HERE");
         Todo todoUpdated = todoService.save(todo);
 
         return new ResponseEntity<Todo>(todoUpdated, HttpStatus.OK);
 
     }
 
-    @PostMapping("/users/{username}/todos")
+    @PostMapping("/{username}/todos")
     public ResponseEntity<Todo> createTodo(@PathVariable String username,
             @RequestBody Todo todo) {
 

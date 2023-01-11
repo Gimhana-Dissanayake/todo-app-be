@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class TodoService {
 
     private static List<Todo> todos = new ArrayList<Todo>();
-    private static int idCounter = 0;
+    private static Long idCounter = 0l;
 
     static {
         todos.add(new Todo(++idCounter, "name one", "description one", new Date(), false));

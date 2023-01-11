@@ -14,8 +14,8 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
     static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
     static {
-        inMemoryUserList.add(new JwtUserDetails(1L, "in28minutes",
-                "$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e", "ROLE_USER_2"));
+        inMemoryUserList.add(new JwtUserDetails(1L, "jimmy",
+                "$2a$12$tz/tlQ8lpCp31vYccrZADe6L7NUG0jBSeAZMUcHwUekk90QNFIufe", "ROLE_USER_2"));
     }
 
     @Override

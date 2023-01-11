@@ -23,22 +23,17 @@ server:
   #     enabled: false
 
 spring:
-  security:
-    user:
-      name: "Gim"
-      password: "gim"
-  datasource:
-    url: jdbc:mysql://localhost:3306/todoapp
-    password: root
-    username: root
   jpa:
     show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-  mvc:
-    throw-exception-if-no-handler-found: true
-  resources:
-    add-mappings: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:

@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,7 +27,7 @@ import com.todo.taskManager.jwt.JwtTokenUtil;
 import com.todo.taskManager.jwt.JwtUserDetails;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:3000")
 public class JwtAuthenticationRestController {
   @Value("${jwt.http.request.header}")
   private String tokenHeader;
@@ -83,6 +85,8 @@ public class JwtAuthenticationRestController {
       throw new AuthenticationException("USER_DISABLED", e);
     } catch (BadCredentialsException e) {
       throw new AuthenticationException("INVALID_CREDENTIALS", e);
+    } catch (Exception e) {
+
     }
   }
 }

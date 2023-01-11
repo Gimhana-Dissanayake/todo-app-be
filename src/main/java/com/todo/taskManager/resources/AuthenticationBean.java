@@ -1,7 +1,5 @@
 package com.todo.taskManager.resources;
 
-import com.todo.taskManager.models.User;
-
 public class AuthenticationBean {
 
     private String msg;
